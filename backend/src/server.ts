@@ -27,6 +27,35 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:5173' }));
 app.use(express.json());
 app.use('/api', rateLimit({ windowMs: 60_000, max: 120 }));
 
+app.get('/', (_req: any, res: any) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>TN Wage Compliance API Server</title>
+        <meta charset="utf-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f2d59; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+          .card { background: #1e3a8a; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+          h1 { margin-top: 0; font-size: 24px; color: #60a5fa; }
+          p { color: #e2e8f0; line-height: 1.6; }
+          a.btn { display: inline-block; margin-top: 20px; background: #2563eb; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; transition: background 0.2s; }
+          a.btn:hover { background: #1d4ed8; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h1>TN Wage Compliance API Server</h1>
+          <p>The backend API is active on <b>port 4000</b> and connected to MongoDB Atlas.</p>
+          <p>To view the Portal Web Application Dashboard UI, click below:</p>
+          <a class="btn" href="http://localhost:5173">Open Portal Dashboard (http://localhost:5173) &rarr;</a>
+        </div>
+      </body>
+    </html>
+  `);
+});
+
+
 // ─── In-memory stores (non-auth business data) ─────────────────
 const establishments: any[] = [];
 const inspections: any[] = [];
